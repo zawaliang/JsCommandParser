@@ -7,8 +7,10 @@
  * @date: 2013/02/04
  * 
  * @usage:
- *  // 实例化JsCommandParser类
+ *  	// 实例化JsCommandParser类
  * 	$cp = new JsCommandParser($str);
+ * 	//  设置当前用户,用户受限访问控制
+ *	$cp->user = 'xxx';
  *	// 调用parse方法解析指令
  *	$cp->parse()
  *	// 给内容添加hash寻址指令
