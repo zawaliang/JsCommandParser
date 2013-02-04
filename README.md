@@ -1,35 +1,36 @@
 JsCommandParser
 ===============
 
-通过自定义指令,自动寻址并提取javascript中的内容
+通过自定义指令,自动寻址并提取javascript中的内容  
 此类仅仅是提取配置内容,UI控件层面需要另行开发,可以使用jQuery UI搭建自己的UI控件层.
 
 
 [使用须知]
 =====
-可视配置指令使用Javascript单行注释格式接入，一个配置项对应一条指令，一条指令占一行，指令行的下一行为配置项。格式如下：
-// @tag  attribute1="value2"  attribute2="value2"  ...  attributeN="valueN"
-此处紧跟配置项（javascript语句）
-指令录入后，系统将自动为每条指令分配唯一的hash标识，此标识用于指令寻址使用。如下：
-// @colorpicker label="colorpicker" hash="v0ae5d076619e398a3af08a8cf1fea98d"
-tag为系统支持的指令标签，每条指令拥有对应的属性以及对应的Javascript变量类型适配范围
-配置项后支持行内注释，但仅限"//xxx"的格式，不支持"/*xxx*/"的格式
-文件发布时，系统将自动去除指令
+可视配置指令使用Javascript单行注释格式接入，一个配置项对应一条指令，一条指令占一行，指令行的下一行为配置项。格式如下：  
+// @tag  attribute1="value2"  attribute2="value2"  ...  attributeN="valueN"  
+此处紧跟配置项（javascript语句）  
+指令录入后，系统将自动为每条指令分配唯一的hash标识，此标识用于指令寻址使用。如下：  
+// @colorpicker label="colorpicker" hash="v0ae5d076619e398a3af08a8cf1fea98d"  
+tag为系统支持的指令标签，每条指令拥有对应的属性以及对应的Javascript变量类型适配范围  
+配置项后支持行内注释，但仅限"//xxx"的格式，不支持"/*xxx*/"的格式  
+文件发布时，系统将自动去除指令  
 
 
 [使用]
-// 实例化JsCommandParser类
-$cp = new JsCommandParser($str);
-//  设置当前用户,用户受限访问控制
-$cp->user = 'xxx';
-// 调用parse方法解析指令
-$cp->parse()
-// 给内容添加hash寻址指令
-$cp->hash();
-// 通过hash表单集合设置指令对应配置项
-$cp->set($data)
-// 删除内容中的指令集
-$cp->del([$str]);
+==
+// 实例化JsCommandParser类  
+$cp = new JsCommandParser($str);  
+//  设置当前用户,用户受限访问控制  
+$cp->user = 'xxx';  
+// 调用parse方法解析指令  
+$cp->parse();  
+// 给内容添加hash寻址指令  
+$cp->hash();  
+// 通过hash表单集合设置指令对应配置项  
+$cp->set($data);  
+// 删除内容中的指令集  
+$cp->del([$str]);  
 
 
 [支持的指令集]
