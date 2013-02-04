@@ -8,13 +8,16 @@ JsCommandParser
 [使用须知]
 ---------------------
 可视配置指令使用Javascript单行注释格式接入，一个配置项对应一条指令，一条指令占一行，指令行的下一行为配置项。格式如下：  
+```
 // @tag  attribute1="value2"  attribute2="value2"  ...  attributeN="valueN"  
+```
 此处紧跟配置项（javascript语句）  
 指令录入后，系统将自动为每条指令分配唯一的hash标识，此标识用于指令寻址使用。如下：  
+```
 // @colorpicker label="colorpicker" hash="v0ae5d076619e398a3af08a8cf1fea98d"  
+```
 tag为系统支持的指令标签，每条指令拥有对应的属性以及对应的Javascript变量类型适配范围  
 配置项后支持行内注释，但仅限"//xxx"的格式，不支持"/*xxx*/"的格式  
-文件发布时，系统将自动去除指令  
 
 
 [使用]
@@ -43,7 +46,8 @@ toggle、radio、checkbox、select、input、textarea、date、range、step、co
 ------------------------
 输出时，系统会根据指令对应的配置项所属Javascript类型自动转换。如下：  
   	
-// 系统自动根据ABC所对应的Javascript类型,自动转换指令值为所需类型  
+// 系统自动根据ABC所对应的Javascript类型,自动转换指令值为所需类型
+```
 var demo = {
 	// @toggle label="开关A" text="是否开启"
 	A: true,
@@ -52,11 +56,12 @@ var demo = {
 	// @toggle label="开关C" text="是否开启"
 	C: "1"
 };
+```
 
 
 [用户访问控制]
 -------------------------
-针对配置内容多场景混合使用的权限控制问题，指令支持设定授权访问用户，添加形如 access="zawaliang;wynnli" 的属性即可，多个用户以分号分割。
+针对多场景混合使用的权限控制问题，指令支持设定授权访问用户，添加形如 access="zawaliang;xxx" 的属性即可，多个用户以分号分割。
 系统在指令解析以及数据写入时均会加以过滤控制。
 
 
