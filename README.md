@@ -6,6 +6,7 @@ JsCommandParser
 
 
 [使用须知]
+=====
 可视配置指令使用Javascript单行注释格式接入，一个配置项对应一条指令，一条指令占一行，指令行的下一行为配置项。格式如下：
 // @tag  attribute1="value2"  attribute2="value2"  ...  attributeN="valueN"
 此处紧跟配置项（javascript语句）
