@@ -602,6 +602,23 @@ class JsCommandParser {
 	}
 
 	/**
+	 * 获取tag指令value值的类型
+	 * @param string $val
+	 * @return string boolean|number|string
+	 */
+	private function get_tag_type($val) {
+		$type = null;
+		if (in_array($val, array('true', 'false'))) {
+			$type = 'boolean';
+		} elseif (preg_match('/^-?\d+(?:\.\d+)?$/', $val)) {
+			$type = 'number';
+		} else {
+			$type = 'string';
+		}
+		return $type;
+	}
+
+	/**
 	 * 获取javascript string类型,判断是单引号还是双引号包含
 	 * @param string $val
 	 * @return string single|double|null
@@ -638,50 +655,18 @@ class JsCommandParser {
 	 * @return array
 	 */
 	private function format_each_tag($conf, $tag_val) {
-		// [1,2] -> 1,2
-		$conf = substr($conf, 1, -1);
-		$conf = explode(',', $conf);
-		
-		// 如果俩数组长度相同,则每一项格式对应做严格匹配
-		if (count($conf) == count($tag_val)) {
-			foreach ($conf as $k => $v) {
-				$v = trim($v);
-				$tag_val[$k] = trim($tag_val[$k]);
-				
-				$type = $this->get_js_type($v);
-				switch ($type) {
-					case 'number':
-						$tag_val[$k] = (float)$tag_val[$k];	
-						break;
-					case 'string':
-						$tag_val[$k] = '"' . $tag_val[$k] . '"';		
-						break;
-					case 'boolean':
-						$tag_val[$k] = (int)$tag_val[$k];
-						$tag_val[$k] = ($tag_val[$k] == 1) ? 'true' : 'false';		
-						break;
-				}
-			}
-			
-		// 否则只根据第一项格式来做匹配
-		} else {
-			$conf = trim($conf[0]);
-			$type = $this->get_js_type($conf);
-			
-			foreach ($tag_val as $k => $v) {
-				$tag_val[$k] = trim($tag_val[$k]);
-				switch ($type) {
-					case 'number':
-						$tag_val[$k] = (float)$tag_val[$k];	
-						break;
-					case 'string':
-						$tag_val[$k] = '"' . $tag_val[$k] . '"';	
-						break;
-					case 'boolean':
-						$tag_val[$k] = (int)$tag_val[$k];
-						$tag_val[$k] = ($tag_val[$k] == 1) ? 'true' : 'false';		
-						break;
-				}
+		// 数组值的类型取决于tag_val值的类型
+		foreach ($tag_val as $k => $v) {
+			$type = $this->get_tag_type($v);
+			switch ($type) {
+				case 'number':
+					$tag_val[$k] = (float)$tag_val[$k];	
+					break;
+				case 'string':
+					$tag_val[$k] = '"' . $tag_val[$k] . '"';	
+					break;
+				case 'boolean':		
+					break;
 			}
 		}
 		
