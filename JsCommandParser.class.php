@@ -3,8 +3,7 @@
  * Javascript可视指令解析器
  * @description: 通过自定义指令,自动寻址并提取javascript中的内容
  * @author: zawa / www.zawaliang.com
- * @version: v1.0.0
- * @date: 2013/02/04
+ * @version: v1.0.1
  * 
  * @usage:
  *  	// 实例化JsCommandParser类
